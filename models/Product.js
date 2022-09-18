@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 // schema design
 const productSchema = mongoose.Schema({
     name: {
@@ -7,7 +7,7 @@ const productSchema = mongoose.Schema({
       trim: true,
       unique: [true, "Name must be unique"],
       minLength: [3, "Name must be at least 3 characters."],
-      maxLenght: [100, "Name is too large"],
+      maxLength: [100, "Name is too large"],
     },
     description: {
       type: String,
@@ -15,7 +15,7 @@ const productSchema = mongoose.Schema({
     },
     price: {
       type: Number,
-      rquired: true,
+      required: true,
       min: [0, "Price can't be negative"],
     },
     unit: {
@@ -34,9 +34,9 @@ const productSchema = mongoose.Schema({
         validator: (value) => {
           const isInteger = Number.isInteger(value);
           if (isInteger) {
-            return true
+            return true;
           } else {
-            return false
+            return false;
           }
         }
       },
@@ -56,7 +56,7 @@ const productSchema = mongoose.Schema({
     // },
     // updatedAt: {
     //   type: Date,
-    //   detfault: Date.now
+    //   default: Date.now
     // }
     // supplier: {
     //   type: mongoose.Schema.Types.ObjectId,
@@ -71,22 +71,22 @@ const productSchema = mongoose.Schema({
     // }]
   }, {
     timestamps: true,
-  })
+  });
   
   
   
   // mongoose middlewares for saving data: pre / post 
   
-   productSchema.pre('save',function(next){
+   productSchema.pre("save",function(next){
   
     //this -> 
-     console.log(' Before saving data');
+     console.log(" Before saving data");
        if (this.quantity == 0) {
-        this.status = 'out-of-stock'
+        this.status = "out-of-stock";
       }
   
-     next()
-   })
+     next();
+   });
   
   
   //  productSchema.post('save',function(doc,next){
@@ -97,11 +97,11 @@ const productSchema = mongoose.Schema({
   
   productSchema.methods.logger= function(){
     console.log(` Data saved for ${this.name}`);
-  }
+  };
   
   
   // SCHEMA -> MODEL -> QUERY
   
-  const Product = mongoose.model('Product', productSchema)
+  const Product = mongoose.model("Product", productSchema);
 
   module.exports = Product;

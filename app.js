@@ -9,7 +9,7 @@ app.use(cors());
 
 
 //routes
-const productRoute= require('./routes/product.route')
+const productRoute= require("./routes/product.route");
 
 
 app.get("/", (req, res) => {
@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 
 // posting to database
 
-app.use('/api/v1/product',productRoute )
+app.use("/api/v1/product",productRoute );
 
 module.exports = app;
 
