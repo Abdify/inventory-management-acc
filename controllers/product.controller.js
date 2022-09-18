@@ -45,29 +45,24 @@ exports.getProducts = async (req, res, next) => {
         console.log(fields);
      }
 
-     //limit -optional  default value=10
-     //page --> 0
-
      if(req.query.page){
-      const {page=0 ,limit=5}=req.query; 
-  
-      const skip = (page -1)* limit ;
+
+       const {page=1, limit=10} = req.query;      // "3" "10"
+      //50 products
+      // each page 10 product
+      //page 1--> 1-10
+      //page 2--> 2-20
+      //page 3--> 21-30     --> page 3  -> skip 1-20  -> 3-1 ->2 *10
+      //page 4--> 31-40      ---> page 4 --> 1-30  --> 4-1  -->3*10
+      //page 5--> 41-50
+
+      const skip = (page - 1)*parseInt(limit);
       queries.skip=skip;
-      queries.limit=limit*1  //convert string to number
-
-
-      //20
-      //page 1: 1-5     
-      //page 2: 6-10
-      //page 3: 11-15   page-->3   -> skip 1-10   =(page-1) * 5= 10
-      //page 4: 16-20   page -->4   --> skip 1-15 = 4 -1 *5 =15
-
-      // each-5-limit
-      //page--4
-
+      queries.limit=parseInt(limit);
 
      }
 
+     
 
     const products = await getProductsService(filters,queries);
 
