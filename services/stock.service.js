@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Stock = require("../models/Stock");
-const ObjectId = mongoose.Types.ObjectId
+const ObjectId = mongoose.Types.ObjectId;
 
 exports.getStocksService = async (filters, queries) => {
 
@@ -10,18 +10,12 @@ exports.getStocksService = async (filters, queries) => {
   //   .select(queries.fields)
   //   .sort(queries.sortBy)
 
-  console.log('hitting')
+  console.log("hitting");
 
-  const stocks = await Stock.aggregate([
-    { $match: {} },
-    { $group: { _id: "", products: { "$sum"} } }
+  const stocks = await Stock.find({});
 
-
-
-  ])
-
-  const total = await Stock.countDocuments(filters)
-  const page = Math.ceil(total / queries.limit)
+  const total = await Stock.countDocuments(filters);
+  const page = Math.ceil(total / queries.limit);
 
   return { total, count: stocks.length, page, stocks };
 };
@@ -31,9 +25,9 @@ exports.getStockByIdService = async (id) => {
   const stock = await Stock.findOne({ _id: id })
     .populate("store.id")
     .populate("suppliledBy.id")
-    .populate("brand.id")
+    .populate("brand.id");
   return stock;
-}
+};
 
 exports.createStockService = async (data) => {
   const stock = await Stock.create(data);
