@@ -9,45 +9,42 @@ const {
 
 exports.getProducts = async (req, res, next) => {
   try {
-  
-
-
     //{price:{$ gt:50}
     //{ price: { gt: '50' } }
     console.log(req.query)
 
-    let  filters={...req.query};
-    
-     //sort , page , limit -> exclude
-     const excludeFields = ['sort','page','limit']
-     excludeFields.forEach(field=> delete filters[field])
+    let filters = { ...req.query };
 
-     //gt ,lt ,gte .lte
-    let  filtersString= JSON.stringify(filters)
-    filtersString= filtersString.replace(/\b(gt|gte|lt|lte)\b/g , match=> `$${match}`)
-     
-    filters= JSON.parse(filtersString)
-     
-    
-    
+    //sort , page , limit -> exclude
+    const excludeFields = ['sort', 'page', 'limit']
+    excludeFields.forEach(field => delete filters[field])
+
+    //gt ,lt ,gte .lte
+    let filtersString = JSON.stringify(filters)
+    filtersString = filtersString.replace(/\b(gt|gte|lt|lte)\b/g, match => `$${match}`)
+
+    filters = JSON.parse(filtersString)
+
+
+
     const queries = {}
 
-     if(req.query.sort){
-        // price,qunatity   -> 'price quantity'
-        const sortBy=req.query.sort.split(',').join(' ')
-        queries.sortBy=sortBy
-        console.log(sortBy);
-     }
+    if (req.query.sort) {
+      // price,qunatity   -> 'price quantity'
+      const sortBy = req.query.sort.split(',').join(' ')
+      queries.sortBy = sortBy
+      console.log(sortBy);
+    }
 
-     if(req.query.fields){
-        const fields=req.query.fields.split(',').join(' ')
-        queries.fields=fields
-        console.log(fields);
-     }
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ')
+      queries.fields = fields
+      console.log(fields);
+    }
 
-     if(req.query.page){
+    if (req.query.page) {
 
-       const {page=1, limit=10} = req.query;      // "3" "10"
+      const { page = 1, limit = 10 } = req.query;      // "3" "10"
       //50 products
       // each page 10 product
       //page 1--> 1-10
@@ -56,15 +53,15 @@ exports.getProducts = async (req, res, next) => {
       //page 4--> 31-40      ---> page 4 --> 1-30  --> 4-1  -->3*10
       //page 5--> 41-50
 
-      const skip = (page - 1)*parseInt(limit);
-      queries.skip=skip;
-      queries.limit=parseInt(limit);
+      const skip = (page - 1) * parseInt(limit);
+      queries.skip = skip;
+      queries.limit = parseInt(limit);
 
-     }
+    }
 
-     
 
-    const products = await getProductsService(filters,queries);
+
+    const products = await getProductsService(filters, queries);
 
     res.status(200).json({
       status: "success",
@@ -84,8 +81,6 @@ exports.createProduct = async (req, res, next) => {
     // save or create
 
     const result = await createProductService(req.body);
-
-    result.logger();
 
     res.status(200).json({
       status: "success",
@@ -107,8 +102,8 @@ exports.updateProductById = async (req, res, next) => {
     const result = await updateProductByIdService(id, req.body);
 
     res.status(200).json({
-        stauts: "success",
-        message: "Successfully updated the product"
+      stauts: "success",
+      message: "Successfully updated the product"
     })
   } catch (error) {
     res.status(400).json({
@@ -144,12 +139,12 @@ exports.deleteProductById = async (req, res, next) => {
     const { id } = req.params;
 
     const result = await deleteProductByIdService(id);
-    
-    if(!result.deletedCount){
-        return res.status(400).json({
-            status: "fail",
-            error: "Couldn't delete the product"
-        })
+
+    if (!result.deletedCount) {
+      return res.status(400).json({
+        status: "fail",
+        error: "Couldn't delete the product"
+      })
     }
 
     res.status(200).json({
@@ -182,3 +177,12 @@ exports.bulkDeleteProduct = async (req, res, next) => {
     });
   }
 };
+
+
+exports.fileUpload = async (req, res) => {
+  try {
+    res.status(200).json(req.files)
+  } catch (error) {
+
+  }
+}

@@ -10,7 +10,7 @@
     "category": "Rice",
     "brand": {
       "name": "Pran",
-      "id": "..."
+      "id": "633177da56be8326a827b812"
     }
   },
   {
@@ -24,7 +24,7 @@
     "category": "Rice",
     "brand": {
       "name": "Pran",
-      "id": "..."
+      "id": "633177da56be8326a827b812"
     }
   },
 
@@ -39,7 +39,7 @@
     "category": "Rice",
     "brand": {
       "name": "Pran",
-      "id": "..."
+      "id": "633177da56be8326a827b812"
     }
   },
 
@@ -53,7 +53,7 @@
     "category": "Rice",
     "brand": {
       "name": "Fresh",
-      "id": "..."
+      "id": "6329f32f40244f2a44c85741"
     }
   },
 
@@ -67,7 +67,7 @@
     "category": "Rice",
     "brand": {
       "name": "ACI",
-      "id": "..."
+      "id": "6329f49f9c503f0b7438b25c"
     }
   },
 
@@ -81,7 +81,7 @@
     "category": "Oil",
     "brand": {
       "name": "Fresh",
-      "id": "..."
+      "id": "6329f32f40244f2a44c85741"
     }
   },
   {
@@ -94,7 +94,7 @@
     "category": "Oil",
     "brand": {
       "name": "Rupchanda",
-      "id": "..."
+      "id": "6329f4a69c503f0b7438b25e"
     }
   },
 
@@ -108,7 +108,21 @@
     "category": "Sugar",
     "brand": {
       "name": "Fresh",
-      "id": "..."
+      "id": "6329f32f40244f2a44c85741"
+    }
+  },
+
+  {
+    "name": "Teer Refined Sugar",
+    "description": "Teer Refined sugar is a modern processes of without touching hand to protect the health of assurance. Fresh refined sugar is completely acid, fecal residues free and neat and clean, healthy, granulated sugar.",
+    "imageURLs": [
+      "https://chaldn.com/_mpimage/fresh-refined-sugar-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D113128&q=best&v=1&m=400&webp=1"
+    ],
+    "unit": "kg",
+    "category": "Sugar",
+    "brand": {
+      "name": "Teer",
+      "id": "63341b10ff782a369881024b"
     }
   }
 ]
