@@ -1,8 +1,12 @@
-const express=require('express')
-const router=express.Router()
-const productController = require('../controllers/product.controller')
+const express=require("express");
+const router=express.Router();
+const productController = require("../controllers/product.controller");
 const uploader = require("../middleware/uploader");
+const verifyToken = require("../middleware/verifyToken");
+const authorization = require("../middleware/authorization");
 
+
+// router.use(verifyToken);
 
 router.post("/file-upload", uploader.array("image"), productController.fileUpload);
 
@@ -14,12 +18,13 @@ router.post("/file-upload", uploader.array("image"), productController.fileUploa
 router.route("/bulk-update").patch(productController.bulkUpdateProduct);
 router.route("/bulk-delete").delete(productController.bulkDeleteProduct);
 
-router.route('/')
-.get(productController.getProducts)
-.post(productController.createProduct)
+router
+  .route("/")
+  .get(productController.getProducts)
+  .post(verifyToken, authorization("admin", "store-manage"), productController.createProduct);
 
 router.route("/:id")
 .patch(productController.updateProductById)
-.delete(productController.deleteProductById)
+.delete(productController.deleteProductById);
 
-module.exports=router
+module.exports=router;
