@@ -19,7 +19,7 @@ exports.getProducts = async (req, res, next) => {
     let  filters={...req.query};
     
      //sort , page , limit -> exclude
-     const excludeFields = ['sort','page','limit']
+     const excludeFields = ['sort','page','limit','fields']
      excludeFields.forEach(field=> delete filters[field])
 
      //gt ,lt ,gte .lte
